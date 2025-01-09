@@ -8,62 +8,77 @@
 </head>
 <body>
     <h1>Bewilligen</h1>
-    <label>Fördergegenstand-ID:</label>
-        <input type="text" id="foerdergegenstand_id" placeholder="Gib hier die Fördergegenstand-ID an...">
-    <label>Antragsnummer:</label>
-        <input type="text" id="antrags_nr" placeholder="Gib hier die gewünschte Antragsnummer an...">
-    <label>Status:</label>
-        <select id="status_nr">
-            <option value="03">03 - Antrag bewilligen</option>
-            <option value="002">002 - Vorhabensidee befürworten</option>
-        </select>
-    <label>Referenznummer:</label>
-        <input type="text" id="referenz_nr" placeholder="Gib hier die Nummer der eingereichten Vorhabensidee an...">
-    <label>Kundenummer:</label>
-        <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
-    
+    <p id="hinweistext"><span id="inserted_hinweis"></span></p>
+    <div class="container">
+        <div class="input-section-1">
+            <label for="antrags_nr">Antragsnummer:</label>
+            <input type="text" id="antrags_nr" placeholder="Gib hier die gewünschte Antragsnummer an...">
 
-    <button onclick="generateText()">Generiere Swagger Input</button>
-    
-    <div id="output">
-        
-        <p id="hinweistext"><span id="inserted_hinweis"></span></p></br>
-        
-        {
-            "vorhaben": {
-              "antragsnummer": "<span id="inserted_antragsnr"></span>",
-              "hauptantragsnummer": "",
-              "foerdergegenstandKennung": "<span id="inserted_fgid"></span>",
-              "kontonummer": "",
-              "organMerkmal": false,
-              "bewilligungsDatum": "",
-              "bewilligungsZeitraumBeginn": "",
-              "bewilligungsZeitraumEnde": "",
-              "durchfuehrungsOrt": "",
-              "zugesagterBetrag": 100000,
-              "inAnspruchGenommenerBetrag": 1002,
-              "status": "<span id="inserted_statusnr"></span>",
-              "referenznummer": "<span id="inserted_referenznr"></span>",
-              "entscheidungsvorlageErstellt": false,
-              "mittelherkunft": "10"
-             },
-            "geschaeftspartner": {
-              "kundennummer": "<span id="inserted_kundennr"></span>",
-               "email": "kenny.maeder@sab.sachsen.de",
-              "vertretungsBerechtigter": "string",
-              "adresseStrasse": " Pirnaische Str.",
-              "adresseHausnummer": "",
-              "adressePlz": "01219",
-              "adresseOrt": "Dresden",
-              "adresseLand": "Deutschland",
-              "nachname": "Maeder",
-              "vorname": "Kenny",
-              "firmenname": "",
-              "telefon": "",
-               "fax": "",
-              "bankverbindungIban": ""
-             }
-            }
+            <label for="foerdergegenstand_id">Fördergegenstand-ID:</label>
+                <input type="text" id="foerdergegenstand_id" placeholder="Gib hier die Fördergegenstand-ID an...">
+
+            <label for="status_nr">Status:</label>
+                <select id="status_nr">
+                    <option value="03">03 - Antrag bewilligen</option>
+                    <option value="002">002 - Vorhabensidee befürworten</option>
+                </select>
+
+            <label for="referenz_nr">Referenznummer:</label>
+                <input type="text" id="referenz_nr" placeholder="Gib hier die Nummer der eingereichten Vorhabensidee an...">
+
+            <label for="kunden_nr">Kundenummer:</label>
+                <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
+        </div>
+
+        <div class="input-section-2">
+            <label for="foerdergegenstand_id">zweite-Ebene</label>
+                <input type="text" id="foerdergegenstand_id" placeholder="Gib hier die Fördergegenstand-ID an...">
+        </div>
+
+
+        <div class="output-section">
+            <div id="output">          
+                {
+                    "vorhaben": {
+                    "antragsnummer": "<span id="inserted_antragsnr"></span>",
+                    "hauptantragsnummer": "",
+                    "foerdergegenstandKennung": "<span id="inserted_fgid"></span>",
+                    "kontonummer": "",
+                    "organMerkmal": false,
+                    "bewilligungsDatum": "",
+                    "bewilligungsZeitraumBeginn": "",
+                    "bewilligungsZeitraumEnde": "",
+                    "durchfuehrungsOrt": "",
+                    "zugesagterBetrag": 100000,
+                    "inAnspruchGenommenerBetrag": 1002,
+                    "status": "<span id="inserted_statusnr"></span>",
+                    "referenznummer": "<span id="inserted_referenznr"></span>",
+                    "entscheidungsvorlageErstellt": false,
+                    "mittelherkunft": "10"
+                    },
+                    "geschaeftspartner": {
+                    "kundennummer": "<span id="inserted_kundennr"></span>",
+                    "email": "kenny.maeder@sab.sachsen.de",
+                    "vertretungsBerechtigter": "string",
+                    "adresseStrasse": " Pirnaische Str.",
+                    "adresseHausnummer": "",
+                    "adressePlz": "01219",
+                    "adresseOrt": "Dresden",
+                    "adresseLand": "Deutschland",
+                    "nachname": "Maeder",
+                    "vorname": "Kenny",
+                    "firmenname": "",
+                    "telefon": "",
+                    "fax": "",
+                    "bankverbindungIban": ""
+                    }
+                    }
+            </div>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="generateText()">Generiere Swagger Input</button>
     </div>
 
     <script>
@@ -89,6 +104,11 @@
             //wichtige Variablen
             const inserted_hinweis = document.getElementById('inserted_hinweis');
             const outputDiv = document.getElementById('output');
+
+
+            //leeren des Hinweistextes
+            inserted_hinweis.textContent = "";
+
 
             //Füllen der Felder nach Bedingungen
             if (input_fgid !== "") {

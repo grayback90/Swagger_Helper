@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Bewilligen</title>
+</head>
+<body>
+    <h1>Bewilligen</h1>
+    <label>Fördergegenstand-ID:</label>
+        <input type="text" id="foerdergegenstand_id" placeholder="Gib hier die Fördergegenstand-ID an...">
+    <label>Antragsnummer:</label>
+        <input type="text" id="antrags_nr" placeholder="Gib hier die gewünschte Antragsnummer an...">
+    <label>Status:</label>
+        <select id="status_nr">
+            <option value="03">03 - Antrag bewilligen</option>
+            <option value="002">002 - Vorhabensidee befürworten</option>
+        </select>
+    <label>Referenznummer:</label>
+        <input type="text" id="referenz_nr" placeholder="Gib hier die Nummer der eingereichten Vorhabensidee an...">
+    <label>Kundenummer:</label>
+        <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
+    
+
+    <button onclick="generateText()">Generiere Swagger Input</button>
+    
+    <div id="output">
+        
+        <p id="hinweistext"><span id="inserted_hinweis"></span></p></br>
+        
+        {
+            "vorhaben": {
+              "antragsnummer": "<span id="inserted_antragsnr"></span>",
+              "hauptantragsnummer": "",
+              "foerdergegenstandKennung": "<span id="inserted_fgid"></span>",
+              "kontonummer": "",
+              "organMerkmal": false,
+              "bewilligungsDatum": "",
+              "bewilligungsZeitraumBeginn": "",
+              "bewilligungsZeitraumEnde": "",
+              "durchfuehrungsOrt": "",
+              "zugesagterBetrag": 100000,
+              "inAnspruchGenommenerBetrag": 1002,
+              "status": "<span id="inserted_statusnr"></span>",
+              "referenznummer": "<span id="inserted_referenznr"></span>",
+              "entscheidungsvorlageErstellt": false,
+              "mittelherkunft": "10"
+             },
+            "geschaeftspartner": {
+              "kundennummer": "<span id="inserted_kundennr"></span>",
+               "email": "kenny.maeder@sab.sachsen.de",
+              "vertretungsBerechtigter": "string",
+              "adresseStrasse": " Pirnaische Str.",
+              "adresseHausnummer": "",
+              "adressePlz": "01219",
+              "adresseOrt": "Dresden",
+              "adresseLand": "Deutschland",
+              "nachname": "Maeder",
+              "vorname": "Kenny",
+              "firmenname": "",
+              "telefon": "",
+               "fax": "",
+              "bankverbindungIban": ""
+             }
+            }
+    </div>
+
+    <script>
+        function generateText() {
+            //Holen der Input-Felder
+            const input_fgid = document.getElementById('foerdergegenstand_id').value.trim();
+            const input_antragsnr = document.getElementById('antrags_nr').value.trim();
+            const input_statusnr = document.getElementById('status_nr').value.trim();
+            const input_referenznr = document.getElementById('referenz_nr').value.trim();
+            const input_kundennr = document.getElementById('kunden_nr').value.trim();
+            
+            //Suchen der Ausgabefelder
+            const inserted_fgid = document.getElementById('inserted_fgid');
+            const inserted_antragsnr = document.getElementById('inserted_antragsnr');
+            const inserted_statusnr = document.getElementById('inserted_statusnr');
+            const inserted_referenznr = document.getElementById('inserted_referenznr');
+            const inserted_kundennr = document.getElementById('inserted_kundennr');
+            
+            //Date Variablen
+            var newDate = new Date();
+            var current_date = newDate.getFullYear() + "" + (newDate.getMonth()+1) + "" + newDate.getDate() + "" + newDate.getHours() + "" + newDate.getMinutes();
+            
+            //wichtige Variablen
+            const inserted_hinweis = document.getElementById('inserted_hinweis');
+            const outputDiv = document.getElementById('output');
+
+            //Füllen der Felder nach Bedingungen
+            if (input_fgid !== "") {
+                inserted_fgid.textContent = input_fgid;
+            } else {
+                inserted_hinweis.textContent = "Bitte geben Sie mindestens die Fördergegenstand-ID ein, bevor Sie auf 'Generiere' klicken.";
+            }
+
+            if (input_kundennr !== "") {
+                inserted_kundennr.textContent = input_kundennr;
+            } else {
+                inserted_hinweis.textContent = "Bitte geben Sie eine Kundennummer ein, bevor Sie auf 'Generiere' klicken.";
+            }
+            
+            if (input_antragsnr !== "") {
+                inserted_antragsnr.textContent = input_antragsnr;
+            } else {
+                inserted_antragsnr.textContent = current_date;
+            }
+
+            if (input_statusnr !== "") {
+                inserted_statusnr.textContent = input_statusnr;
+            } else {
+                inserted_statusnr.textContent = "03";
+            }
+
+            if (input_referenznr !== "" && input_statusnr == "002") {
+                inserted_referenznr.textContent = input_referenznr;
+            } else if(input_referenznr !== "" && input_statusnr == "03") {
+                inserted_hinweis.textContent = "Soll eine Vorhabensidee befürwortet werden? Dann ist der Status auf 002 zu setzen.";
+                inserted_referenznr.textContent = "";
+            } else if(input_referenznr == "" && input_statusnr == "002") {
+                inserted_hinweis.textContent = "Soll eine Vorhabensidee befürwortet werden? Dann bitte eine Referenznummer eintragen.";
+                inserted_referenznr.textContent = "";
+            } else {
+                inserted_referenznr.textContent = "";
+            }
+        }
+    </script>
+</body>
+</html>

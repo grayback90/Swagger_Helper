@@ -1,29 +1,88 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Zentriert die Überschrift */
 }
-input, button {
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px; /* Abstand unter der Überschrift */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1500px; /* Begrenzung der maximalen Breite */
+}
+
+.input-section, .output-section {
+    width: 45%; /* Beide Bereiche nehmen jeweils 45% der Breite ein */
+}
+
+.input-section-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Abstand zwischen den Eingabefeldern */
+}
+
+.input-section-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Abstand zwischen den Eingabefeldern */
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
     padding: 10px;
     font-size: 16px;
-    margin: 10px;
-    width: 80%;
+    width: 100%;
     max-width: 400px;
 }
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Abstand oberhalb des Buttons */
+}
+
 button {
     cursor: pointer;
+    padding: 20px;
+    font-size: 16px;
     background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 5px;
+    width: 100%; /* Button auf halbe Breite begrenzen */
 }
+
 button:hover {
     background-color: #0056b3;
 }
-#output {
+
+.output-section {
+    text-align: left; /* Text linksbündig */
     font-size: 18px;
     color: #333;
-    margin-top: 20px;
+    display: flex;
+    align-items: flex-start; /* Vertikale Ausrichtung */
+}
+
+#output {
     display: block;
 }
 

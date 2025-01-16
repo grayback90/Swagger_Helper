@@ -12,10 +12,13 @@
     <div class="container">
         <div class="input-section-1">
             <label for="antrags_nr">Antragsnummer:</label>
-            <input type="text" id="antrags_nr" placeholder="Gib hier die gewünschte Antragsnummer an...">
+            <input type="text" id="antrags_nr" placeholder="Kann leer gelassen werden.">
 
             <label for="foerdergegenstand_id">Fördergegenstand-ID:</label>
                 <input type="text" id="foerdergegenstand_id" placeholder="Gib hier die Fördergegenstand-ID an...">
+
+            <label for="referenz_nr">Beginn Bewilligungszeitraum:</label>
+                <input type="text" id="bzb" placeholder="Format: 2025-01-18 oder leer">
 
             <label for="status_nr">Status:</label>
                 <select id="status_nr">
@@ -25,14 +28,23 @@
 
             <label for="referenz_nr">Referenznummer:</label>
                 <input type="text" id="referenz_nr" placeholder="Gib hier die Nummer der eingereichten Vorhabensidee an...">
-
-            <label for="kunden_nr">Kundenummer:</label>
-                <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
         </div>
 
         <div class="input-section-2">
-            <label for="foerdergegenstand_id">zweite-Ebene</label>
-                <input type="text" id="foerdergegenstand_id" placeholder="Gib hier die Fördergegenstand-ID an...">
+            <label for="kunden_nr">Kundenummer:</label>
+                <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
+            
+            <label for="kunden_nr">Vorname:</label>
+                <input type="text" id="vorname" placeholder="Kann leer gelassen werden.">
+            
+            <label for="kunden_nr">Nachname:</label>
+                <input type="text" id="nachname" placeholder="Kann leer gelassen werden.">
+            
+            <label for="kunden_nr">Firmenname:</label>
+                <input type="text" id="firma" placeholder="Kann leer gelassen werden.">
+
+            <label for="kunden_nr">Mail-Adresse:</label>
+                <input type="text" id="mail_adresse" placeholder="Kann leer gelassen werden.">
         </div>
 
 
@@ -46,7 +58,7 @@
                     "kontonummer": "",
                     "organMerkmal": false,
                     "bewilligungsDatum": "",
-                    "bewilligungsZeitraumBeginn": "",
+                    "bewilligungsZeitraumBeginn": "<span id="inserted_bzb"></span>",
                     "bewilligungsZeitraumEnde": "",
                     "durchfuehrungsOrt": "",
                     "zugesagterBetrag": 100000,
@@ -58,27 +70,27 @@
                     },
                     "geschaeftspartner": {
                     "kundennummer": "<span id="inserted_kundennr"></span>",
-                    "email": "kenny.maeder@sab.sachsen.de",
+                    "email": "<span id="inserted_mail"></span>",
                     "vertretungsBerechtigter": "string",
                     "adresseStrasse": " Pirnaische Str.",
                     "adresseHausnummer": "",
                     "adressePlz": "01219",
                     "adresseOrt": "Dresden",
                     "adresseLand": "Deutschland",
-                    "nachname": "Maeder",
-                    "vorname": "Kenny",
-                    "firmenname": "",
+                    "nachname": "<span id="inserted_nachname"></span>",
+                    "vorname": "<span id="inserted_vorname"></span>",
+                    "firmenname": "<span id="inserted_firma"></span>",
                     "telefon": "",
                     "fax": "",
                     "bankverbindungIban": ""
                     }
-                    }
+                }
+            </div>
+
+            <div class="button-container">
+                <button onclick="generateText()">Generiere Swagger Input</button>
             </div>
         </div>
-    </div>
-
-    <div class="button-container">
-        <button onclick="generateText()">Generiere Swagger Input</button>
     </div>
 
     <script>
@@ -89,6 +101,11 @@
             const input_statusnr = document.getElementById('status_nr').value.trim();
             const input_referenznr = document.getElementById('referenz_nr').value.trim();
             const input_kundennr = document.getElementById('kunden_nr').value.trim();
+            const input_vorname = document.getElementById('vorname').value.trim();
+            const input_nachname = document.getElementById('nachname').value.trim();
+            const input_firma = document.getElementById('firma').value.trim();
+            const input_mail = document.getElementById('mail_adresse').value.trim();
+            const input_bzb = document.getElementById('bzb').value.trim();
             
             //Suchen der Ausgabefelder
             const inserted_fgid = document.getElementById('inserted_fgid');
@@ -96,6 +113,11 @@
             const inserted_statusnr = document.getElementById('inserted_statusnr');
             const inserted_referenznr = document.getElementById('inserted_referenznr');
             const inserted_kundennr = document.getElementById('inserted_kundennr');
+            const inserted_vorname = document.getElementById('inserted_vorname');
+            const inserted_nachname = document.getElementById('inserted_nachname');
+            const inserted_firma = document.getElementById('inserted_firma');
+            const inserted_mail = document.getElementById('inserted_mail');
+            const inserted_bzb = document.getElementById('inserted_bzb');
             
             //Date Variablen
             var newDate = new Date();
@@ -138,13 +160,43 @@
             if (input_referenznr !== "" && input_statusnr == "002") {
                 inserted_referenznr.textContent = input_referenznr;
             } else if(input_referenznr !== "" && input_statusnr == "03") {
-                inserted_hinweis.textContent = "Soll eine Vorhabensidee befürwortet werden? Dann ist der Status auf 002 zu setzen.";
+                inserted_hinweis.textContent = "Es wurde eine Referenznummer eingetragen. Soll eine Vorhabensidee befürwortet werden? Dann ist der Status auf 002 zu setzen.";
                 inserted_referenznr.textContent = "";
             } else if(input_referenznr == "" && input_statusnr == "002") {
-                inserted_hinweis.textContent = "Soll eine Vorhabensidee befürwortet werden? Dann bitte eine Referenznummer eintragen.";
+                inserted_hinweis.textContent = "Der Status wurde auf 002 gesetzt. Soll eine Vorhabensidee befürwortet werden? Dann bitte eine Referenznummer eintragen.";
                 inserted_referenznr.textContent = "";
             } else {
                 inserted_referenznr.textContent = "";
+            }
+
+            if (input_vorname !== "") {
+                inserted_vorname.textContent = input_vorname;
+            } else {
+                inserted_vorname.textContent = "";
+            }
+
+            if (input_nachname !== "") {
+                inserted_nachname.textContent = input_nachname;
+            } else {
+                inserted_nachname.textContent = "";
+            }
+
+            if (input_firma !== "") {
+                inserted_firma.textContent = input_firma;
+            } else {
+                inserted_firma.textContent = "SAB";
+            }
+
+            if (input_mail !== "") {
+                inserted_mail.textContent = input_mail;
+            } else {
+                inserted_mail.textContent = "customizer@sab.sachsen.de";
+            }
+
+            if (input_bzb !== "") {
+                inserted_bzb.textContent = input_bzb;
+            } else {
+                inserted_bzb.textContent = "";
             }
         }
     </script>

@@ -56,7 +56,9 @@ select {
 .button-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Abstand oberhalb des Buttons */
+    margin-top: 100px; /* Abstand oberhalb des Buttons */
+    margin-left: 150px;
+    margin-right: 150px;
 }
 
 button {
@@ -78,7 +80,6 @@ button:hover {
     text-align: left; /* Text linksbündig */
     font-size: 18px;
     color: #333;
-    display: flex;
     align-items: flex-start; /* Vertikale Ausrichtung */
 }
 

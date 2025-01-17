@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
+    <title>Vorhabensidee</title>
+</head>
+<body>
+    <h1>Vorhabensidee</h1>
+    <p id="hinweistext"><span id="inserted_hinweis"></span></p>
+    <div class="container">
+        <div class="input-section-1">
+            <label for="antrags_nr">Antragsnummer:</label>
+            <input type="text" id="antrags_nr" placeholder="Kann leer gelassen werden.">
+            <span class="tooltip-icon" data-tooltip="Geben Sie hier Ihren vollständigen Namen ein.">?</span>
+
+            <label for="foerdergegenstand_id">Fördergegenstand-ID:</label>
+                <input type="text" id="foerdergegenstand_id" placeholder="Gib hier die Fördergegenstand-ID an...">
+
+            <label for="referenz_nr">Beginn Bewilligungszeitraum:</label>
+                <input type="text" id="bzb" placeholder="Format: 2025-01-18 oder leer">
+
+            <label for="status_nr">Status:</label>
+                <select id="status_nr">
+                    <option value="03">03 - Antrag bewilligen</option>
+                    <option value="002">002 - Vorhabensidee befürworten</option>
+                </select>
+
+            <label for="referenz_nr">Referenznummer:</label>
+                <input type="text" id="referenz_nr" placeholder="Gib hier die Nummer der eingereichten Vorhabensidee an...">
+        </div>
+
+        <div class="input-section-2">
+            <label for="kunden_nr">Kundenummer:</label>
+                <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
+            
+            <label for="kunden_nr">Vorname:</label>
+                <input type="text" id="vorname" placeholder="Kann leer gelassen werden.">
+            
+            <label for="kunden_nr">Nachname:</label>
+                <input type="text" id="nachname" placeholder="Kann leer gelassen werden.">
+            
+            <label for="kunden_nr">Firmenname:</label>
+                <input type="text" id="firma" placeholder="Kann leer gelassen werden.">
+
+            <label for="kunden_nr">Mail-Adresse:</label>
+                <input type="text" id="mail_adresse" placeholder="Kann leer gelassen werden.">
+        </div>
+
+
+        <div class="output-section">
+            <div id="output">          
+                {
+                    "vorhaben": {
+                    "antragsnummer": "<span id="inserted_antragsnr"></span>",
+                    "hauptantragsnummer": "",
+                    "foerdergegenstandKennung": "<span id="inserted_fgid"></span>",
+                    "kontonummer": "",
+                    "organMerkmal": false,
+                    "bewilligungsDatum": "",
+                    "bewilligungsZeitraumBeginn": "<span id="inserted_bzb"></span>",
+                    "bewilligungsZeitraumEnde": "",
+                    "durchfuehrungsOrt": "",
+                    "zugesagterBetrag": 100000,
+                    "inAnspruchGenommenerBetrag": 1002,
+                    "status": "<span id="inserted_statusnr"></span>",
+                    "referenznummer": "<span id="inserted_referenznr"></span>",
+                    "entscheidungsvorlageErstellt": false,
+                    "mittelherkunft": "10"
+                    },
+                    "geschaeftspartner": {
+                    "kundennummer": "<span id="inserted_kundennr"></span>",
+                    "email": "<span id="inserted_mail"></span>",
+                    "vertretungsBerechtigter": "string",
+                    "adresseStrasse": " Pirnaische Str.",
+                    "adresseHausnummer": "",
+                    "adressePlz": "01219",
+                    "adresseOrt": "Dresden",
+                    "adresseLand": "Deutschland",
+                    "nachname": "<span id="inserted_nachname"></span>",
+                    "vorname": "<span id="inserted_vorname"></span>",
+                    "firmenname": "<span id="inserted_firma"></span>",
+                    "telefon": "",
+                    "fax": "",
+                    "bankverbindungIban": ""
+                    }
+                }
+            </div>
+
+            <div class="button-container">
+                <button onclick="generateText()">Generiere Swagger Input</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="vorhabensidee.js"></script>
+</body>
+</html>

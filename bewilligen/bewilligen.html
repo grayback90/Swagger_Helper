@@ -21,20 +21,11 @@
             <label for="referenz_nr">Beginn Bewilligungszeitraum:</label>
                 <input type="text" id="bzb" placeholder="Format: 2025-01-18 oder leer">
 
-            <label for="status_nr">Status:</label>
-                <select id="status_nr">
-                    <option value="03">03 - Antrag bewilligen</option>
-                    <option value="002">002 - Vorhabensidee befürworten</option>
-                </select>
-
-            <label for="referenz_nr">Referenznummer:</label>
-                <input type="text" id="referenz_nr" placeholder="Gib hier die Nummer der eingereichten Vorhabensidee an...">
+            <label for="kunden_nr">Kundenummer:</label>
+                <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
         </div>
 
         <div class="input-section-2">
-            <label for="kunden_nr">Kundenummer:</label>
-                <input type="text" id="kunden_nr" placeholder="Gib hier deine Kundennummer an...">
-            
             <label for="kunden_nr">Vorname:</label>
                 <input type="text" id="vorname" placeholder="Kann leer gelassen werden.">
             
@@ -64,8 +55,8 @@
                     "durchfuehrungsOrt": "",
                     "zugesagterBetrag": 100000,
                     "inAnspruchGenommenerBetrag": 1002,
-                    "status": "<span id="inserted_statusnr"></span>",
-                    "referenznummer": "<span id="inserted_referenznr"></span>",
+                    "status": "03",
+                    "referenznummer": "",
                     "entscheidungsvorlageErstellt": false,
                     "mittelherkunft": "10"
                     },

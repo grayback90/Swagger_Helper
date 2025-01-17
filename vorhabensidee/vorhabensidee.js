@@ -2,7 +2,6 @@ function generateText() {
     //Holen der Input-Felder
     const input_fgid = document.getElementById('foerdergegenstand_id').value.trim();
     const input_antragsnr = document.getElementById('antrags_nr').value.trim();
-    const input_statusnr = document.getElementById('status_nr').value.trim();
     const input_referenznr = document.getElementById('referenz_nr').value.trim();
     const input_kundennr = document.getElementById('kunden_nr').value.trim();
     const input_vorname = document.getElementById('vorname').value.trim();
@@ -14,7 +13,6 @@ function generateText() {
     //Suchen der Ausgabefelder
     const inserted_fgid = document.getElementById('inserted_fgid');
     const inserted_antragsnr = document.getElementById('inserted_antragsnr');
-    const inserted_statusnr = document.getElementById('inserted_statusnr');
     const inserted_referenznr = document.getElementById('inserted_referenznr');
     const inserted_kundennr = document.getElementById('inserted_kundennr');
     const inserted_vorname = document.getElementById('inserted_vorname');
@@ -55,23 +53,13 @@ function generateText() {
         inserted_antragsnr.textContent = current_date;
     }
 
-    if (input_statusnr !== "") {
-        inserted_statusnr.textContent = input_statusnr;
+    if (input_referenznr !== "") {
+        inserted_referenznr.textContent = input_referenznr;
     } else {
-        inserted_statusnr.textContent = "03";
+        inserted_hinweis.textContent = "Bitte eine Referenznummer eintragen.";
+        inserted_referenznr.textContent = "";
     }
 
-    if (input_referenznr !== "" && input_statusnr == "002") {
-        inserted_referenznr.textContent = input_referenznr;
-    } else if(input_referenznr !== "" && input_statusnr == "03") {
-        inserted_hinweis.textContent = "Es wurde eine Referenznummer eingetragen. Soll eine Vorhabensidee befürwortet werden? Dann ist der Status auf 002 zu setzen.";
-        inserted_referenznr.textContent = "";
-    } else if(input_referenznr == "" && input_statusnr == "002") {
-        inserted_hinweis.textContent = "Der Status wurde auf 002 gesetzt. Soll eine Vorhabensidee befürwortet werden? Dann bitte eine Referenznummer eintragen.";
-        inserted_referenznr.textContent = "";
-    } else {
-        inserted_referenznr.textContent = "";
-    }
 
     if (input_vorname !== "") {
         inserted_vorname.textContent = input_vorname;

@@ -21,7 +21,17 @@ function generateText() {
     
     //Date Variablen
     var newDate = new Date();
-    var current_date = newDate.getFullYear() + "" + (newDate.getMonth()+1) + "" + newDate.getDate() + "" + newDate.getHours() + "" + newDate.getMinutes();
+    //wenn Ergebnis zwischen 1-9 dann führende 0
+    const minutes = newDate.getMinutes();
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const month = newDate.getMonth()+1;
+    const formattedMonth = String(month).padStart(2, '0');
+    const hours = newDate.getHours();
+    const formattedHours = String(hours).padStart(2, '0');
+    const day = newDate.getDate();
+    const formattedDay = String(day).padStart(2, '0');
+    //Zusammenbauen des Datums
+    var current_date = newDate.getFullYear() + "" + formattedMonth + "" + formattedDay + "" + formattedHours + "" + formattedMinutes;
     
     //wichtige Variablen
     const inserted_hinweis = document.getElementById('inserted_hinweis');

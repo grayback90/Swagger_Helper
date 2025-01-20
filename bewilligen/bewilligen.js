@@ -81,3 +81,18 @@ function generateText() {
         inserted_bzb.textContent = "";
     }
 }
+
+function copyToClipboard() {
+    const outputDiv = document.getElementById('output');
+    const textToCopy = outputDiv.innerText.trim(); // Nimmt den sichtbaren Text
+
+    if (textToCopy) {
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            alert("Text wurde in die Zwischenablage kopiert!");
+        }).catch(() => {
+            alert("Fehler beim Kopieren in die Zwischenablage.");
+        });
+    } else {
+        alert("Es gibt keinen Text zum Kopieren. Bitte erst generieren!");
+    }
+}

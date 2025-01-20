@@ -55,6 +55,8 @@ select {
 
 .button-container {
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     justify-content: center;
     margin-top: 100px; /* Abstand oberhalb des Buttons */
     margin-left: 150px;
